@@ -9,7 +9,7 @@
       Description: {{ $dummy->description }}
     </p>
 
-    @if (Auth::user()->isAdmin())
+    {{-- @if (Auth::user()->isAdmin()) --}}
       <form action="{{ route('dummy.destroy', $dummy->id) }}" method="POST" class="inline">
         @csrf
         @method('DELETE')
@@ -22,5 +22,5 @@
       </form>
       <a href="{{ route('dummy.update', $dummy) }}">Update</a>
       <a href="{{ route('dummy.show', $dummy) }}">Show</a>
-    @endif
+    {{-- @endif --}}
   </div>

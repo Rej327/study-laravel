@@ -12,9 +12,9 @@ class UserController extends Controller
     public function index()
     {
         // Logic to display the user list
-        if(Auth::user()->isAdmin()) {
+        // if(Auth::user()->isAdmin()) {
             return redirect()->route('dashboard');
-        }
-        return view('user.user');
+        // }
+        // return view('user.user');
     }
 }
