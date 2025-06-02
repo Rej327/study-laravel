@@ -10,4 +10,12 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'image_path'];
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
+    }
+
 }
+
+

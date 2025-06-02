@@ -11,12 +11,19 @@ class PhotoController extends Controller
     public function index()
     {
         $photos = Photo::latest()->get();
+        // If you want to pass comments to the view, you can do so like this:
         return view('photos.index', compact('photos'));
     }
 
     public function create()
     {
         return view('photos.create');
+    }
+
+    public function show(Photo $photo)
+    {
+        $photo->load('comments.user'); 
+        return view('photos.show', compact('photo'));
     }
 
      public function store(Request $request)
@@ -44,7 +51,7 @@ class PhotoController extends Controller
             $photo->user_id = auth()->id();
             $photo->save();
 
-            return redirect()->back()->with('success', 'Photo uploaded successfully!');
+            return redirect()->route('photos')->with('success', 'Photo uploaded successfully.');
         }
 
         return redirect()->back()->with('error', 'Please select an image to upload.');
@@ -52,9 +59,9 @@ class PhotoController extends Controller
 
     public function destroy(Photo $photo)
     {
-        Storage::disk('public')->delete($photo->image_path);
+        Storage::disk('public')->delete($photo->id);
         $photo->delete();
 
-        return redirect()->route('photos.index')->with('success', 'Photo deleted.');
+        return redirect()->route('photos')->with('success', 'Photo deleted.');
     }
 }

@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Upload Photo</title>
-</head>
-<body>
-    <h1>Upload New Photo</h1>
+<x-app-layout>
+    <h1 class="text-2xl text-center my-4">Upload New Photo</h1>
 
     @if(session('success'))
-        <p style="color:green;">{{ session('success') }}</p>
+        <p style="color:rgb(0, 85, 0); background-color: rgba(175, 255, 175, 0.521); width: fit-content;">{{ session('success') }}</p>
     @endif
 
     @if(session('error'))
@@ -32,5 +27,4 @@
         <input type="file" name="image" required><br><br>
         <button type="submit">Upload</button>
     </form>
-</body>
-</html>
+</x-app-layout>

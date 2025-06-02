@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
@@ -29,7 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/photos/create', [PhotoController::class, 'create'])->name('photos.create');
         Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
-        Route::get('/photos', [PhotoController::class, 'index'])->name('photos.index');
+        Route::get('/photos', [PhotoController::class, 'index'])->name('photos');
+        Route::get('/photos/{photo}', [PhotoController::class, 'show'])->name('photos.show');
         Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->name('photos.destroy');
         
 
@@ -47,6 +49,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/comments', [CommentsController::class, 'index'])->name('comments');
+    Route::get('/comments/create', [CommentsController::class, 'create'])->name('comments.create');
+    Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
+    // Route::get('/comments/{comment}', [CommentsController::class, 'show'])->name('comments.show');
+    // Route::get('/comments/{comment}/edit', [CommentsController::class, 'edit'])->name('comments.edit');
+    // Route::put('/comments/{comment}', [CommentsController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentsController::class, 'destroy'])->name('comments.destroy');
+    Route::get('/users', [UserController::class, 'index'])->name('users');
 });
 
 
